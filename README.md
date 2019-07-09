@@ -1,4 +1,4 @@
 [Image of me]
-(https://avatars2.githubusercontent.com/u/43009165?s=460&v=4)
+(https://i.ibb.co/YjBs8t7/IMG-3928.jpg)
 Evan Jackson
 evanojackson@gmail.com
