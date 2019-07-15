@@ -10,81 +10,220 @@
 
 
     <link rel="stylesheet" href="css/main.css" />
-    <link rel="stylesheet" href="css/pure-min.css"/>
+    <link rel="stylesheet" href="css/pure-min.css" />
+    <link rel="stylesheet" href="css/grid.css" />
     <link rel="icon" href="images/favicon.png" />
 </head>
 
 <body>
-    
+
     <script src="js/jquery-3.4.1.min.js"></script>
-    
-    <script>
-        $(function () {
 
-            $('body').append('<h1>Lesson 10</h1>');
-            $('body').append('<h3>Ordered Striped Table with colors!</h3>');
-            // https://stackoverflow.com/questions/979256/sorting-an-array-of-javascript-objects-by-property/979325#979325
-            var sort_by = function (field, reverse, primer) {
+    <div class="container">
+        <div class="item item1"> test
+                <h1>Lesson 10</h1>
+                <h3>Ordered Striped Table with colors!</h3>
+            <script>
+                $(function () {
+                    // https://stackoverflow.com/questions/979256/sorting-an-array-of-javascript-objects-by-property/979325#979325
+                    $('div class="item item1').append("test");
+                    var sort_by = function (field, reverse, primer) {
 
-                var key = primer ?
-                    function (x) { return primer(x[field]) } :
-                    function (x) { return x[field] };
+                        var key = primer ?
+                            function (x) { return primer(x[field]) } :
+                            function (x) { return x[field] };
 
-                reverse = !reverse ? 1 : -1;
+                        reverse = !reverse ? 1 : -1;
 
-                return function (a, b) {
-                    return a = key(a), b = key(b), reverse * ((a > b) - (b > a));
-                }
-            }
-
-
-            /**
-             * theads [array] : array of string col heads
-             * trows [json] : json array of data
-             */
-            function buildTable(theads, trows) {
-                $('body').append('<div id="t1"></div>');
-                
-                
-                var table = '<table class="pure-table pure-table-bordered" id="tcolor">';
-                for (var i = 0; i < theads.length; i++) {
-                    table += '<th>' + theads[i] + '</th>';
-                }
-                for (var i = 0; i < trows.length; i++) {
-                    table += '<tr>';
-                    for (var key in trows[i]) {
-                        if (trows[i].hasOwnProperty(key)) {
-                            table += '<td>' + trows[i][key] + '</td>';
+                        return function (a, b) {
+                            return a = key(a), b = key(b), reverse * ((a > b) - (b > a));
                         }
                     }
-                    // Adding new column here and grabbing color from json
-                    table += '<td style="background:'+trows[i]['html']+'"></td>';
-                    table += '</tr>';
-                }
-                table += '</table>';
-                $('#t1').append(table);
 
-                $( "#tcolor > tbody > tr:odd" ).css( "background-color", "#c0c0c0" );
 
-            }
+                    /**
+                     * theads [array] : array of string col heads
+                     * trows [json] : json array of data
+                     */
+                    function buildTable(theads, trows) {
+                        $('#item item1').append('<div id="t1"></div>');
 
-            $.get("http://167.99.158.119/assignment_03/colors.json")
-                .done(function (data) {
-                    data.sort(function(a,b){
-                        if(a.name < b.name){
-                            return -1;
+
+                        var table = '<table class="pure-table pure-table-bordered" id="tcolor">';
+                        for (var i = 0; i < theads.length; i++) {
+                            table += '<th>' + theads[i] + '</th>';
                         }
-                        if(b.name < a.name){
-                            return 1;
+                        for (var i = 0; i < trows.length; i++) {
+                            table += '<tr>';
+                            for (var key in trows[i]) {
+                                if (trows[i].hasOwnProperty(key)) {
+                                    table += '<td>' + trows[i][key] + '</td>';
+                                }
+                            }
+                            // Adding new column here and grabbing color from json
+                            table += '<td style="background:' + trows[i]['html'] + '"></td>';
+                            table += '</tr>';
                         }
-                        return 0;
-                    });
-                    // Added extra column header ("example") for our colored column
-                    buildTable(['html', 'name', 'rgb', 'example'], data);
+                        table += '</table>';
+                        $('#t1').append(table);
+
+                        $("#tcolor > tbody > tr:odd").css("background-color", "#c0c0c0");
+                    }
+
+                    $.get("http://167.99.158.119/assignment_03/colors.json")
+                        .done(function (data) {
+                            data.sort(function (a, b) {
+                                if (a.rgb[1] < b.rgb[1]) {
+                                    return -1;
+                                }
+                                if (b.rgb[1] < a.rgb[1]) {
+                                    return 1;
+                                }
+                                return 0;
+                            });
+                            // Added extra column header ("example") for our colored column
+                            buildTable(['html', 'name', 'rgb', 'example'], data);
+                        });
                 });
-        });
-    </script>
+            </script>
+        </div>
+        <div class="item item2"> test
+            <script>
+                $(function () {
+
+                    $('#item item2').append('<h1>Lesson 10</h1>');
+                    $('#item item2').append('<h3>Ordered Striped Table with colors!</h3>');
+                    // https://stackoverflow.com/questions/979256/sorting-an-array-of-javascript-objects-by-property/979325#979325
+                    var sort_by = function (field, reverse, primer) {
+
+                        var key = primer ?
+                            function (x) { return primer(x[field]) } :
+                            function (x) { return x[field] };
+
+                        reverse = !reverse ? 1 : -1;
+
+                        return function (a, b) {
+                            return a = key(a), b = key(b), reverse * ((a > b) - (b > a));
+                        }
+                    }
+
+
+                    /**
+                     * theads [array] : array of string col heads
+                     * trows [json] : json array of data
+                     */
+                    function buildTable(theads, trows) {
+                        $('#item item2').append('<div id="t2"></div>');
+
+
+                        var table = '<table class="pure-table pure-table-bordered" id="tcolor">';
+                        for (var i = 0; i < theads.length; i++) {
+                            table += '<th>' + theads[i] + '</th>';
+                        }
+                        for (var i = 0; i < trows.length; i++) {
+                            table += '<tr>';
+                            for (var key in trows[i]) {
+                                if (trows[i].hasOwnProperty(key)) {
+                                    table += '<td>' + trows[i][key] + '</td>';
+                                }
+                            }
+                            // Adding new column here and grabbing color from json
+                            table += '<td style="background:' + trows[i]['html'] + '"></td>';
+                            table += '</tr>';
+                        }
+                        table += '</table>';
+                        $('#t2').append(table);
+
+                        $("#tcolor > tbody > tr:odd").css("background-color", "#c0c0c0");
+                    }
+
+                    $.get("http://167.99.158.119/assignment_03/colors.json")
+                        .done(function (data) {
+                            data.sort(function (a, b) {
+                                if (a.rgb[0] < b.rgb[0]) {
+                                    return -1;
+                                }
+                                if (b.rgb[0] < a.rgb[0]) {
+                                    return 1;
+                                }
+                                return 0;
+                            });
+                            // Added extra column header ("example") for our colored column
+                            buildTable(['html', 'name', 'rgb', 'example'], data);
+                        });
+                });
+            </script>
+        </div>
+        <div class="item item3"> test
+            <script>
+                $(function () {
+
+                    $('#item item3').append('<h1>Lesson 10</h1>');
+                    $('#item item3').append('<h3>Ordered Striped Table with colors!</h3>');
+                    // https://stackoverflow.com/questions/979256/sorting-an-array-of-javascript-objects-by-property/979325#979325
+                    var sort_by = function (field, reverse, primer) {
+
+                        var key = primer ?
+                            function (x) { return primer(x[field]) } :
+                            function (x) { return x[field] };
+
+                        reverse = !reverse ? 1 : -1;
+
+                        return function (a, b) {
+                            return a = key(a), b = key(b), reverse * ((a > b) - (b > a));
+                        }
+                    }
+
+
+                    /**
+                     * theads [array] : array of string col heads
+                     * trows [json] : json array of data
+                     */
+                    function buildTable(theads, trows) {
+                        $('#item item3').append('<div id="t3"></div>');
+
+
+                        var table = '<table class="pure-table pure-table-bordered" id="tcolor">';
+                        for (var i = 0; i < theads.length; i++) {
+                            table += '<th>' + theads[i] + '</th>';
+                        }
+                        for (var i = 0; i < trows.length; i++) {
+                            table += '<tr>';
+                            for (var key in trows[i]) {
+                                if (trows[i].hasOwnProperty(key)) {
+                                    table += '<td>' + trows[i][key] + '</td>';
+                                }
+                            }
+                            // Adding new column here and grabbing color from json
+                            table += '<td style="background:' + trows[i]['html'] + '"></td>';
+                            table += '</tr>';
+                        }
+                        table += '</table>';
+                        $('#t3').append(table);
+
+                        $("#tcolor > tbody > tr:odd").css("background-color", "#c0c0c0");
+                    }
+
+                    $.get("http://167.99.158.119/assignment_03/colors.json")
+                        .done(function (data) {
+                            data.sort(function (a, b) {
+                                if (a.rgb[2] < b.rgb[2]) {
+                                    return -1;
+                                }
+                                if (b.rgb[2] < a.rgb[2]) {
+                                    return 1;
+                                }
+                                return 0;
+                            });
+                            // Added extra column header ("example") for our colored column
+                            buildTable(['html', 'name', 'rgb', 'example'], data);
+                        });
+                });
+            </script>
+        </div>
+    </div>
+
+
 </body>
 
 </html>
-
