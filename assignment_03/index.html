@@ -6,11 +6,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Color Picker</title>
+    <title>RGB Sort</title>
 
 
     <link rel="stylesheet" href="css/main.css" />
     <link rel="stylesheet" href="css/pure-min.css" />
+    <!-- added grid css to my header -->
     <link rel="stylesheet" href="css/grid.css" />
     <link rel="icon" href="images/favicon.png" />
 </head>
@@ -19,13 +20,18 @@
 
     <script src="js/jquery-3.4.1.min.js"></script>
 
+    <!-- added container for the entire page, broken up by columns-->
     <div class="container">
+        <!-- each list is the original grid, however they are sorted by rgb value so that they grow in one value-->
         <div class="item item1">
                 <h1>Green</h1>
                 <h3>This list gets progressively "greener"</h3>
             <script>
                 $(function () {
                     // https://stackoverflow.com/questions/979256/sorting-an-array-of-javascript-objects-by-property/979325#979325
+                    // while testing how the grid works, I included this, however for some reason
+                    // whenever i call append later, this, instead of inserting test, makes the .container
+                    // line up in the column defined earlier. I honestly have no idea why
                     $('.item item1').append("test");
                     var sort_by = function (field, reverse, primer) {
 
@@ -46,6 +52,9 @@
                      * trows [json] : json array of data
                      */
                     function buildTable(theads, trows) {
+                        // when i attempted to append to the item item1 it did not appear, however
+                        // appending it to container seems to replace "test" from the previous
+                        // for an unknown reason
                         $('.container').append('<div id="t1"></div>');
 
 
