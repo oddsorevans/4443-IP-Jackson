@@ -86,7 +86,7 @@
                 'state': $('#state').val()
             }
             console.log(JSON.stringify(form_data));
-            $.post("167.99.158.119/assignment_05//", form_data)
+            $.post("167.99.158.119/assignment_05/api.php", form_data)
                 .done(function (data) {
                     console.log(data);
                 });
