@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>RGB Sort</title>
+
+
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/pure-min.css" />
+    <!-- added grid css to my header -->
+    <link rel="stylesheet" href="css/grid.css" />
+    <link rel="icon" href="images/favicon.png" />
+</head>
+
+<body>
+
+    <script src="js/jquery-3.4.1.min.js"></script>
+
+    <script>
+        $(function(){
+            $('body').append('<h1>Assignment 6</h1>');
+            $('body').append('<h3>Student photos</h3>');
+
+            function buildTable(trows){
+                $('body').append('<div id = "t1"></div>');
+
+                //set table to be of container type so it has the correct grid layout
+                var table = '<div class = "container>';
+
+                for (var i = 0; i < trows.length; i++){
+                    //iteratively adding items into item so that it keeps each into an individual
+                    //cell
+                    var ppath = "http://167.99.158.119/assignment_06/card_service_data/" + trows[i].photo;
+                    table += "<div class = 'item' + $.get(ppath); >"
+
+                    table += "<div class = 'cell-item'>" + trows[i][first_name] + '</div>';
+                    table += "</div>";
+                }
+                table += "</div>";
+                $("t1").append(table);
+            }
+
+            $.get("http://167.99.158.119/assignment_06/card_service_data/student_data.json")
+                .done(function(data) {
+                    buildTable(data);
+                });
+
+        });
+    </script>
+</body>
+
+</html>

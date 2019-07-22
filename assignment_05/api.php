@@ -14,7 +14,7 @@ $routes = [
 ];
 // Enter your Host, username, password, database below.
 // This password should not end up in github (like I just did).
-$conn = mysqli_connect("localhost", "username", "password", "database");
+$conn = mysqli_connect("localhost", "web_user", "Tr8p3r-#", "http://167.99.158.119/phpmyadmin/");
 if (mysqli_connect_errno()) {
     echo "Failed to connect to MySQL: " . mysqli_connect_error();
     die();
