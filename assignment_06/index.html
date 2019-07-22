@@ -72,21 +72,6 @@
             }
 
             /**
-            * Input: Some string hex value: #AA00FF
-            * Returns: string [black,white]
-            * 
-            * You could alter the function to return: #000000 or #FFFFFF
-            */
-            function getContrastYIQ(hexcolor) {
-                hexcolor = hexcolor.replace("#", "");
-                var r = parseInt(hexcolor.substr(0, 2), 16);
-                var g = parseInt(hexcolor.substr(2, 2), 16);
-                var b = parseInt(hexcolor.substr(4, 2), 16);
-                var yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
-                return (yiq >= 128) ? '#000000' : '#FFFFFF';
-            }
-
-            /**
              * labels [array] : array of string col heads
              * row [json] : json array of data
              * id [int]   : integer id
@@ -116,7 +101,7 @@
                     var ppath = data[i].photo;
                     console.log(ppath);
                     $('#colors').append(card);
-                    $('#card-' + i).append('<img src="http://167.99.158.119/assignment_06/card_service_data".concat(ppath) width = "200" heights = "200">');
+                    $('#card-' + i).append('<img src="http://167.99.158.119/assignment_06/card_service_data' + ppath + '"width = "200" heighth = "200">');
                 }
             }
 
