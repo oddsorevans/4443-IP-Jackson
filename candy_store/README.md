@@ -1,16 +1,1 @@
-Pure CSS Layout Examples
-========================
-
-Layout examples using [Pure CSS][pure] compiled from the [pure-site][] project.
-
-[pure]: http://purecss.io/
-[pure-site]: https://github.com/pure-css/pure-site
-
-
-License
--------
-
-This software is free to use under the zLib license.
-See the [zLib][] license for more information.
-
-[zLib]: http://www.zlib.net/zlib_license.html
+Candy store aims to generate a table of varying size with results of the category chosem of candies. As of now, it will only generate if the catagory is one of the accepted catagories. I soon plan on making it search the title of the candy as well, but probably do that as drop down option. 
