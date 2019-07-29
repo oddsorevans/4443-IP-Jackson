@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Request Page</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css" integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous">
+</head>
+
+<body>
+    <script src="js/jquery.min.js"></script>
+
+</body>
+<script>
+
+    //Building the form, size select, and click event
+    $(function () {
+        $('body').append('<form class="pure-form">  <fieldset> <legend>Candy Search</legend>',
+        '<div class="pure-g">',
+        '<input type="Search Narrow" placeholder="Search" id="sBar"> <label for="remember"> </label>',
+        '<select id="num" class="pure-input-1-2" id="num"> <option>10</option> <option>25</option> <option>50</option>',
+        '</div>',
+        '<button type="submit" class="pure-button pure-button-primary" id = "cSearch">Search</button> </fieldset> </form>');
+
+        //Build table after click event, so that the size is correct.
+        $('#cSearch').click(function(){
+            console.log($('#sBar').val(), $('#num').val());
+
+            $.get("http://167.99.158.119/candy_store/api/?route=candy&keyword=" + $('#sBar').val() + "&column=category&start=50&chunk=" + $('#num').val())
+            .done(function (data) {
+                let json = data.data;
+                console.log(json);
+                //json.forEach(function (ele) {
+                    //console.log(ele);
+                    //let img = '<img id="'+ele.id+'" src="'+ele.original_image_url+'">';
+                    //$('body').append(img);
+                //});
+
+            
+
+            //begin building the table with the headers
+            $('body').append('<table class="pure-table" id = "table"> <thead> <tr><th>#</th> <th>Name</th> <th>Price</th> </tr> </thead>');
+
+            $('#table').append('<tbody>');
+            
+            //This will be the same for each row, so it can be done in a for loop
+            for (var i = 0; i < $('#num').val(); i++){
+                $('#table').append('<tr> <td>' + (i + 1) +'</td> <td>' + json[i].title + '</td> <td>' + json[i].price + '</td> </tr>');
+            }
+
+            $('#table').append('</table>');
+        });
+        });
+
+
+    });
+</script>
+
+</html>
