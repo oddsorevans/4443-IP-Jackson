@@ -30,7 +30,7 @@
         $('#cSearch').click(function(){
             console.log($('#sBar').val(), $('#num').val());
 
-            $.get("http://167.99.158.119/candy_store/api/?route=candy&keyword=" + $('#sBar').val() + "&column=category&start=50&chunk=" + $('#num').val())
+            $.get("http://167.99.158.119/candy_store/api/?route=candy&keyword=%" + $('#sBar').val() + "%&column=category&start=50&chunk=" + $('#num').val())
             .done(function (data) {
                 let json = data.data;
                 console.log(json);
