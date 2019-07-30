@@ -43,13 +43,13 @@
             
 
             //begin building the table with the headers
-            $('body').append('<table class="pure-table" id = "table"> <thead> <tr><th>#</th> <th>Name</th> <th>Price</th> </tr> </thead>');
+            $('body').append('<table class="pure-table" id = "table"> <thead> <tr><th>#</th> <th>Name</th> <th>Count</th> <th>Price</th> </tr> </thead>');
 
             $('#table').append('<tbody>');
             
             //This will be the same for each row, so it can be done in a for loop
             for (var i = 0; i < $('#num').val(); i++){
-                $('#table').append('<tr> <td>' + (i + 1) +'</td> <td>' + json[i].title + '</td> <td>' + json[i].price + '</td> </tr>');
+                $('#table').append('<tr> <td>' + (i + 1) +'</td> <td>' + json[i].title + '</td> <td>' + json[i].amount + json[i].units + '</td> <td>' + json[i].price + '</td> </tr>');
             }
 
             $('#table').append('</table>');
