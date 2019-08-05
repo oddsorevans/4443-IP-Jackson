@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Photo Maker</title>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+  <script src="js/jquery.min.js"></script>
+
+  <div class="image" id="pic">
+    <!-- the image container -->
+    <img src="origami.jpg" alt="" /> <!-- the image -->
+    <h2>
+      <span><span class='spacer' id="text"></span></span>
+      <!-- span tag to beautify it efficiently -->
+    </h2> <!-- the text -->
+  </div>
+  <button type="button" id="reload">Next</button>
+</body>
+<script>
+  //$('body').append('Test');
+  //Grabs json data for the subreddit. By default grabs the one off of hot
+  $.get('https://www.reddit.com/r/Showerthoughts/.json')
+    .done(function (data) {
+      num = Math.floor((Math.random() * 26) + 2); //json is limited to 27 items, and the top 2 are info on the subreddit
+      console.log(num);
+      console.log(data.data.children[num].data.title);
+      current = data.data.children[num].data.title;
+      $('#text').append(current);
+      //Click event to reload the text with a new text. Will eventually add change for photo as well
+      $('#reload').click(function () {
+        num = Math.floor((Math.random() * 26) + 2) // get a new random number to change the text
+        change = data.data.children[num].data.title;
+        $("#text").html($("#text").html().replace(current,change)); // Replace the old text with the new text
+        current = change; // set old text to new current text, so that this can be ran multiple times
+      })
+    });
+</script>
+
+</html>
