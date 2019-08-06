@@ -1,20 +1,43 @@
-.image 
-{ 
-position: relative; /* To help the image + text element to get along with the rest of the page*/ 
-width: 100%; /* for IE 6 */ 
-} 
-h2 
-{ 
-position: absolute; /* To place the text on the image*/
-align-self: center; /* Other beautification stuff */
-width: 100%; 
-}
-/* Coloring time */
-h2 span /* decorating the text within the span tag */
-{ 
-color: white; 
-font: bold 24px/45px Helvetica, Sans-Serif; 
-letter-spacing: -1px; 
-background: rgba(0, 0, 0, 0.7); padding: 10px; 
-}
-h2 span.spacer { padding:0 5px; } /* to pad the background color of text to make it look more elegant */
+/* Container holding the image and the text */
+.container {
+    position: relative;
+    text-align: center;
+    color: white;
+  }
+  
+  /* Bottom left text */
+  .bottom-left {
+    position: absolute;
+    bottom: 8px;
+    left: 16px;
+  }
+  
+  /* Top left text */
+  .top-left {
+    position: absolute;
+    top: 8px;
+    left: 16px;
+  }
+  
+  /* Top right text */
+  .top-right {
+    position: absolute;
+    top: 8px;
+    right: 16px;
+  }
+  
+  /* Bottom right text */
+  .bottom-right {
+    position: absolute;
+    bottom: 8px;
+    right: 16px;
+  }
+  
+  /* Centered text */
+  .centered {
+    position: absolute;
+    font-size: 32px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
