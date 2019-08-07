@@ -5,17 +5,45 @@
   <meta charset="utf-8" />
   <title>Photo Maker</title>
   <link rel="stylesheet" href="style.css" type="text/css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script src="https://files.codepedia.info/files/uploads/iScripts/html2canvas.js"></script>
 </head>
 
 <body>
-  <script src="js/jquery.min.js"></script>
-  <div class='container' id='combo'>
-    <div class='centered' id='text'></div>
-  </div>
+  <canvas id="canvas" width="100%" height="100%"></canvas>
+    <div class='container' id='combo'>
+      <img id="image" src=" " style="width:100%">
+      <div class='centered' id='text'></div>
+    </div>
 
 
   <button type="button" id="tReload">Next Quote</button>
   <button type="button" id="pReload">Next Photo</button>
+  <a id="screenshot" download="myImage.jpg" href='' onclick="download_img(this);">Download</a>
+  <br />
+  <div id="previewImage" style="display:none;"></div>
+
+  <script>
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+    var ox = canvas.width / 6;
+    var oy = canvas.height / 6;
+    ctx.font = "42px serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillStyle = "#800";
+    ctx.fillRect(ox, oy, 4 * ox, 4 * oy);
+
+    src = "https://c8.staticflickr.com/8/7492/15644563231_4d682b3c88_n.jpg"
+
+    var img = document.getElementById("image");
+    ctx.drawImage(img, 130, 100, 50, 60, 2 * ox, 2 * oy, 2 * ox, 2 * oy);
+
+    download_img = function (el) {
+      var image = canvas.toDataURL("image/jpg");
+      el.href = image;
+    };
+  </script>
 </body>
 <script>
   //$('body').append('Test');
@@ -29,26 +57,31 @@
           console.log(tdata.data.children[num].data.title);
 
           pcurrent = pdata.data.children[num].data.preview.images[0].source.url;
+          pcurrent = pcurrent.replace('amp;s', 's');
           console.log(pcurrent);
           tcurrent = tdata.data.children[num].data.title;
-          $('#combo').prepend('<img id="image" src=' + pcurrent + ' style="width:100%">');
+          $('#image').attr('src', pcurrent);
           $('#text').append(tcurrent);
+
 
           //Click event to reload the text with a new text. Will eventually add change for photo as well
           $('#tReload').click(function () {
-            num = Math.floor((Math.random() * 26) + 2); // get a new random number to change the text
+            num = Math.floor((Math.random() * 24) + 1); // get a new random number to change the text
             tchange = tdata.data.children[num].data.title;
             $("#text").html($("#text").html().replace(tcurrent, tchange)); // Replace the old text with the new text
             tcurrent = tchange; // set old text to new current text, so that this can be ran multiple times
-          })
+          });
+        })
 
-          $('#pReload').click(function() {
-            num = Math.floor((Math.random() * 24) + 1);
-            pchange = pdata.data.children[num].data.preview.images[0].source.url;
-            $('#image').attr('src',pchange);
-            pcurrent = pchange;
-          })
-        });
+      //click even to replace the image with the next one
+      $('#pReload').click(function () {
+        num = Math.floor((Math.random() * 24) + 1);
+        pchange = pdata.data.children[num].data.preview.images[0].source.url;
+        //https://old.reddit.com/r/redditdev/comments/9ncg2r/changes_in_api_pictures/
+        pchange = pchange.replace('amp;s', 's');
+        $('#image').attr('src', pchange);
+        pcurrent = pchange;
+      });
     });
 </script>
 
