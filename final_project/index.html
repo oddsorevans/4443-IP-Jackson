@@ -24,6 +24,32 @@
       background-color: rgba(0, 0, 0, 0.3);
       transform: translate(-50%, -50%);
     }
+
+    /*css for upload in bootstrap*/
+    .btn-file {
+      margin: auto;
+      overflow: hidden;
+    }
+
+    .btn-file input[type=file] {
+      margin: auto;
+      top: 0;
+      right: 0;
+      min-width: 100%;
+      min-height: 100%;
+      font-size: 100px;
+      text-align: right;
+      filter: alpha(opacity=0);
+      opacity: 0;
+      outline: none;
+      background: white;
+      cursor: inherit;
+      display: block;
+    }
+
+    #img-upload {
+      width: 100%;
+    }
   </style>
 
   <title>No Earth Context</title>
@@ -46,6 +72,7 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
     <div class="container">
+      <img src="logo.png" id="logo" height="auto">
       <a class="navbar-brand js-scroll-trigger" href="#page-top">Final Project</a>
       <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded"
         type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
@@ -140,6 +167,59 @@
     </div>
   </section>
 
+  <!-- Upload Section -->
+  <section class="page-section bg-primary text-white mb-0" id="about">
+    <div class="container">
+
+      <!-- About Section Heading -->
+      <h2 class="page-section-heading text-center text-uppercase text-white">About</h2>
+
+      <!-- Icon Divider -->
+      <div class="divider-custom divider-light">
+        <div class="divider-custom-line"></div>
+        <div class="divider-custom-icon">
+          <i class="fas fa-star"></i>
+        </div>
+        <div class="divider-custom-line"></div>
+      </div>
+
+      <!-- About Section Content -->
+      <div class="container mx-auto">
+        <div class="col-md-6">
+          <div class="form-group">
+            <div class="input-group">
+              <span class="input-group-btn">
+                <span class="btn btn-xl btn-outline-light">
+                  Browse… <input type="file" id="imgInp">
+                </span>
+              </span>
+              <input class="form-control" id="uptext" type="text" placeholder="Add Caption" required="required"
+                data-validation-required-message="Please enter your name.">
+              <a class="btn btn-xl btn-outline-light" id="uploadSubmit">
+                <i class="fas fa-download mr-2"></i>
+                Overlay Text
+              </a>
+            </div>
+            <div class='container'>
+              <div id="uploadHolder">
+                <img id='img-upload' />
+                <div class="centered" id="uploadText"> </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-4">
+        <a class="btn btn-xl btn-outline-light" id="customDownload">
+          <i class="fas fa-download mr-2"></i>
+          Save
+        </a>
+      </div>
+
+    </div>
+  </section>
+
   <!-- Contact Section -->
   <section class="page-section" id="contact">
     <div class="container">
@@ -205,8 +285,8 @@
         <!-- Footer Location -->
         <div class="col-lg-4 mb-5 mb-lg-0">
           <h4 class="text-uppercase mb-4">Location</h4>
-          <p class="lead mb-0">2215 John Daniel Drive
-            <br>Clark, MO 65243</p>
+          <p class="lead mb-0"> 3410 Taft Blvd
+            <br>Wichita Falls, TX 76308</p>
         </div>
 
         <!-- Footer Social Icons -->
@@ -321,22 +401,86 @@
       });
     });
 
-    $(function () {
-        $("#contactForm").submit(function (event) {
-            event.preventDefault();
-            // form.serialize
-            var form_data = {
-                'fname': $('#fname').val(),
-                'lname': $('#lname').val(),
-                'email': $('#email').val(),
-            }
-            console.log(JSON.stringify(form_data));
-            $.post("http://167.99.158.119/final_project/api/post_email.php", form_data)
-                .done(function (data) {
-                    console.log(data);
-                });
+  $(function () {
+    $("#contactForm").submit(function (event) {
+      event.preventDefault();
+      // form.serialize
+      var form_data = {
+        'fname': $('#fname').val(),
+        'lname': $('#lname').val(),
+        'email': $('#email').val(),
+      }
+      console.log(JSON.stringify(form_data));
+      $.post("http://167.99.158.119/final_project/api/post_email.php", form_data)
+        .done(function (data) {
+          console.log(data);
         });
     });
+  });
+
+
+  $(document).ready(function () {
+    $(document).on('change', '.btn-file :file', function () {
+      var input = $(this),
+        label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+      input.trigger('fileselect', [label]);
+    });
+
+    $('.btn-file :file').on('fileselect', function (event, label) {
+
+      var input = $(this).parents('.input-group').find(':text'),
+        log = label;
+
+      if (input.length) {
+        input.val(log);
+      } else {
+        if (log) alert(log);
+      }
+
+    });
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+          $('#img-upload').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+    $("#imgInp").change(function () {
+      readURL(this);
+    });
+  });
+
+  $("#uploadSubmit").click(function () {
+    $('#uploadText').html($('#uptext').val());
+  });
+
+  $('#customDownload').click(function () {
+    var element = $("#uploadHolder"); // global variable
+    var getCanvas; // global variable
+
+    html2canvas(element, {
+      onrendered: function (canvas) {
+        getCanvas = canvas;
+        $('#customDownload').html('Download');
+      }
+    });
+
+    $("#customDownload").on('click', function () {
+      var imgageData = getCanvas.toDataURL("image/png");
+      // Now browser starts downloading it instead of just showing it
+      var newData = imgageData.replace(/^data:image\/png/, "data:application/octet-stream");
+      $("#customDownload").attr("download", "CustomNoContext.png").attr("href", newData);
+      $('#customDownload').html('Save');
+    });
+  });
+
+
+
 </script>
 
 </html>
