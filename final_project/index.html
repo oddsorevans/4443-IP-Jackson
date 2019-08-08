@@ -2,53 +2,269 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <title>Photo Maker</title>
-  <link rel="stylesheet" href="style.css" type="text/css" />
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <!--allows for me to overlay text on object-->
+  <style>
+    /* Container holding the image and the text */
+    .container {
+      position: relative;
+      text-align: center;
+      color: white;
+    }
+
+    /* Centered text */
+    .centered {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      background-color: rgba(0, 0, 0, 0.3);
+      transform: translate(-50%, -50%);
+    }
+  </style>
+
+  <title>No Earth Context</title>
+
   <script src="https://files.codepedia.info/files/uploads/iScripts/html2canvas.js"></script>
+
+
+  <!-- Custom fonts for this theme -->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
+    type="text/css">
+  <!-- Theme CSS -->
+  <link href="css/freelancer.min.css" rel="stylesheet">
+
 </head>
 
-<body>
-  <canvas id="canvas" width="100%" height="100%"></canvas>
-    <div class='container' id='combo'>
-      <img id="image" src=" " style="width:100%">
-      <div class='centered' id='text'></div>
+<body id="page-top">
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">Final Project</a>
+      <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded"
+        type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
+        aria-expanded="false" aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item mx-0 mx-lg-1">
+            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" id="tReload">Next Quote</a>
+          </li>
+          <li class="nav-item mx-0 mx-lg-1">
+            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" id="pReload">Next Photo</a>
+          </li>
+          <li class="nav-item mx-0 mx-lg-1">
+            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">About</a>
+          </li>
+          <li class="nav-item mx-0 mx-lg-1">
+            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">Newsletter</a>
+          </li>
+        </ul>
+      </div>
     </div>
+  </nav>
+
+  <!-- Masthead -->
+  <header class="masthead bg-primary text-white text-center">
+    <div class="container">
+      <div id="html-content-holder">
+        <img src="" id="image" width="100%;">
+        <div class="centered" id="text"></div>
+      </div>
+      <div class="text-center mt-4">
+        <a class="btn btn-xl btn-outline-light" id="btn-Convert-Html2Image">
+          <i class="fas fa-download mr-2"></i>
+          Save
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <div id="previewImage" style="display: none;"> </div>
 
 
-  <button type="button" id="tReload">Next Quote</button>
-  <button type="button" id="pReload">Next Photo</button>
-  <a id="screenshot" download="myImage.jpg" href='' onclick="download_img(this);">Download</a>
-  <br />
-  <div id="previewImage" style="display:none;"></div>
+  <!-- About Section -->
+  <section class="page-section bg-primary text-white mb-0" id="about">
+    <div class="container">
 
-  <script>
-    var canvas = document.getElementById("canvas");
-    var ctx = canvas.getContext("2d");
-    var ox = canvas.width / 6;
-    var oy = canvas.height / 6;
-    ctx.font = "42px serif";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.fillStyle = "#800";
-    ctx.fillRect(ox, oy, 4 * ox, 4 * oy);
+      <!-- About Section Heading -->
+      <h2 class="page-section-heading text-center text-uppercase text-white">About</h2>
 
-    src = "https://c8.staticflickr.com/8/7492/15644563231_4d682b3c88_n.jpg"
+      <!-- Icon Divider -->
+      <div class="divider-custom divider-light">
+        <div class="divider-custom-line"></div>
+        <div class="divider-custom-icon">
+          <i class="fas fa-star"></i>
+        </div>
+        <div class="divider-custom-line"></div>
+      </div>
 
-    var img = document.getElementById("image");
-    ctx.drawImage(img, 130, 100, 50, 60, 2 * ox, 2 * oy, 2 * ox, 2 * oy);
+      <!-- About Section Content -->
+      <div class="row">
+        <div class="col-lg-4 ml-auto">
+          <p class="lead">This is my final project! The project uses a back end to handle the photo requests, as well as
+            compressing the div
+            into one image for export. There is a database connected that saves emails for a mailing list to get 1 print
+            a week.</p>
+        </div>
+        <div class="col-lg-4 mr-auto">
+          <p class="lead">The backend was made with php, while the frontend used a bootstrap theme for the templating.
+            The photos are pulled from r/earthporn,
+            and the text from r/nocontext. Thanks to Prof.Griffin for saving me countless times!
+          </p>
+        </div>
+      </div>
 
-    download_img = function (el) {
-      var image = canvas.toDataURL("image/jpg");
-      el.href = image;
-    };
-  </script>
+      <!-- About Section Button -->
+      <div class="text-center mt-4">
+        <a class="btn btn-xl btn-outline-light" href="https://www.reddit.com/r/Earthporn">
+          <i class="fas fa-download mr-2"></i>
+          r/Earthporn
+        </a>
+      </div>
+      <div class="text-center mt-4">
+        <a class="btn btn-xl btn-outline-light" href="https://www.reddit.com/r/nocontext">
+          <i class="fas fa-download mr-2"></i>
+          r/Nocontext
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="page-section" id="contact">
+    <div class="container">
+
+      <!-- Contact Section Heading -->
+      <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Sign Up for Photos!</h2>
+
+      <!-- Icon Divider -->
+      <div class="divider-custom">
+        <div class="divider-custom-line"></div>
+        <div class="divider-custom-icon">
+          <i class="fas fa-star"></i>
+        </div>
+        <div class="divider-custom-line"></div>
+      </div>
+
+      <!-- Contact Section Form -->
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
+          <form name="sentMessage" id="contactForm" novalidate="novalidate">
+            <div class="control-group">
+              <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                <label>First Name</label>
+                <input class="form-control" id="fname" type="text" placeholder="First Name" required="required"
+                  data-validation-required-message="Please enter your name.">
+                <p class="help-block text-danger"></p>
+              </div>
+            </div>
+            <div class="control-group">
+              <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                <label>Last Name</label>
+                <input class="form-control" id="lname" type="text" placeholder="Last Name" required="required"
+                  data-validation-required-message="Please enter your name.">
+                <p class="help-block text-danger"></p>
+              </div>
+            </div>
+            <div class="control-group">
+              <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                <label>Email Address</label>
+                <input class="form-control" id="email" type="email" placeholder="Email Address" required="required"
+                  data-validation-required-message="Please enter your email address.">
+                <p class="help-block text-danger"></p>
+              </div>
+            </div>
+            <br>
+            <div id="success"></div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary btn-xl" id="sendMessageButton">Send</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer text-center">
+    <div class="container">
+      <div class="row">
+
+        <!-- Footer Location -->
+        <div class="col-lg-4 mb-5 mb-lg-0">
+          <h4 class="text-uppercase mb-4">Location</h4>
+          <p class="lead mb-0">2215 John Daniel Drive
+            <br>Clark, MO 65243</p>
+        </div>
+
+        <!-- Footer Social Icons -->
+        <div class="col-lg-4 mb-5 mb-lg-0">
+          <h4 class="text-uppercase mb-4">Around the Web</h4>
+          <a class="btn btn-outline-light btn-social mx-1" href="#">
+            <i class="fab fa-fw fa-facebook-f"></i>
+          </a>
+          <a class="btn btn-outline-light btn-social mx-1" href="#">
+            <i class="fab fa-fw fa-twitter"></i>
+          </a>
+          <a class="btn btn-outline-light btn-social mx-1" href="#">
+            <i class="fab fa-fw fa-linkedin-in"></i>
+          </a>
+          <a class="btn btn-outline-light btn-social mx-1" href="#">
+            <i class="fab fa-fw fa-dribbble"></i>
+          </a>
+        </div>
+
+        <!-- Footer About Text -->
+        <div class="col-lg-4">
+          <h4 class="text-uppercase mb-4">About Freelancer</h4>
+          <p class="lead mb-0">Freelance is a free to use, MIT licensed Bootstrap theme created by
+            <a href="http://startbootstrap.com">Start Bootstrap</a>.</p>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+  <!-- Copyright Section -->
+  <section class="copyright py-4 text-center text-white">
+    <div class="container">
+      <small>Copyright &copy; Your Website 2019</small>
+    </div>
+  </section>
+
+  <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+  <div class="scroll-to-top d-lg-none position-fixed ">
+    <a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="js/freelancer.min.js"></script>
+
 </body>
 <script>
   //$('body').append('Test');
   //Grabs json data for the subreddit. By default grabs the one off of hot
-  $.get('https://www.reddit.com/r/EarthPorn/.json')
+  $.get('http://167.99.158.119/final_project/api/earthporn/two.json')
     .done(function (pdata) {
       $.get('https://www.reddit.com/r/nocontext/.json')
         .done(function (tdata) {
@@ -56,8 +272,7 @@
           console.log(num);
           console.log(tdata.data.children[num].data.title);
 
-          pcurrent = pdata.data.children[num].data.preview.images[0].source.url;
-          pcurrent = pcurrent.replace('amp;s', 's');
+          pcurrent = pdata[num].localurl;
           console.log(pcurrent);
           tcurrent = tdata.data.children[num].data.title;
           $('#image').attr('src', pcurrent);
@@ -76,12 +291,51 @@
       //click even to replace the image with the next one
       $('#pReload').click(function () {
         num = Math.floor((Math.random() * 24) + 1);
-        pchange = pdata.data.children[num].data.preview.images[0].source.url;
+        pchange = pdata[num].localurl;
         //https://old.reddit.com/r/redditdev/comments/9ncg2r/changes_in_api_pictures/
         pchange = pchange.replace('amp;s', 's');
         $('#image').attr('src', pchange);
         pcurrent = pchange;
       });
+
+      //https://forums.asp.net/t/2146532.aspx?Download+HTML+to+Image+in+jQuery+Div+or+Table+to+jpg+png
+      $('#btn-Convert-Html2Image').click(function () {
+        var element = $("#html-content-holder"); // global variable
+        var getCanvas; // global variable
+
+        html2canvas(element, {
+          onrendered: function (canvas) {
+            $("#previewImage").html(canvas);
+            getCanvas = canvas;
+            $('#btn-Convert-Html2Image').html('Download');
+          }
+        });
+
+        $("#btn-Convert-Html2Image").on('click', function () {
+          var imgageData = getCanvas.toDataURL("image/png");
+          // Now browser starts downloading it instead of just showing it
+          var newData = imgageData.replace(/^data:image\/png/, "data:application/octet-stream");
+          $("#btn-Convert-Html2Image").attr("download", "NoContextEarth.png").attr("href", newData);
+          $('#btn-Convert-Html2Image').html('Save');
+        });
+      });
+    });
+
+    $(function () {
+        $("#contactForm").submit(function (event) {
+            event.preventDefault();
+            // form.serialize
+            var form_data = {
+                'fname': $('#fname').val(),
+                'lname': $('#lname').val(),
+                'email': $('#email').val(),
+            }
+            console.log(JSON.stringify(form_data));
+            $.post("http://167.99.158.119/final_project/api/post_email.php", form_data)
+                .done(function (data) {
+                    console.log(data);
+                });
+        });
     });
 </script>
 
